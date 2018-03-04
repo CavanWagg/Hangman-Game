@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Hangman!</title>
+ <link rel="stylesheet" href="assets/style.css">
+</head>
+JavaScript for Kids
+©2015, Nick Morgan 
+Creating a Hangman Game 119
+<body>
+ <h1>Hangman!</h1>
+ <p id="game"></p>
+ <div id="wordContainer"></div>
+ <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript">
+ </script>
+ <script>
+
+
+  var alphabet = [
+  "a", "b", "c", "d",  "e", "f",  "g", "h", "i",  "j", "k", "l", "m", "n",  "o",  "p", "q",  "r",  "s", "t", "u", "v", "w", "x", "y", "z" ]
+
+
+ // Create an array of words
+
+ const wordBank = ['abyss','axiom','bandwagon','bookworm','blizzard','boxcar','croquet','dwarves','espionage',
+'galvanize','haphazard','jaundice','jiujitsu','jawbreaker','kazoo','jukebox','larynx','kiwifruit','microwave',
+'knapsack', 'oxygen', 'numbskull', 'pajama', 'pnuemonia','rickshaw','snazzy','strength', 
+'syndrome', 'vortex', 'witchcraft', 'zephyr'];
+ // Pick a random word
+ var word = wordBank[Math.floor(Math.random() * wordBank.length)];
+ // Set up the answer array
+ var answerArray = [];
+ for (var i = 0; i < word.length; i++) {
+ answerArray[i] = "_";
+ }
+ var remainingLetters = word.length;
+ 
+//  // The game loop
+  //  while (remainingLetters > 0) {
+//  // Show the player their progress
+// $('#game').append(answerArray.join(" "));
+
+//keypress 
+document.onkeyup = function(a){
+  var Currentguess = a.key;
+
+
+}
+
+
+//display guessed letters
+var tileNumber = word.length;
+var wrongAnswerCount = 0;
+previousGuesses=[];
+
+for (i = 0; i < tileNumber; i++) {
+
+  $('#wordContainer').append('<div class="tile" id=t'+i+'></div>');
+ }
+  //adds blank tiles to the screen and gives each tile an identifier: t0, t1, etc
+//   if word[i] === guess {
+//     answerArray[i] = guess;
+//   }
+// }
+// }
+//     }
+   
+//  }
+
+
+
+  // index = alphabet.indexOf(guess)
+  // index === -1
+ </script>
+
+</body>
+</html>
