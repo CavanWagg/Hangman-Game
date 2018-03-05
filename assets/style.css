@@ -1,17 +1,52 @@
-body {
-  background: brown;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: aquamarine;
+
 }
 
-#container {
-  width: 50%;
-  padding: 10px;
-  background-color: #cccccc;
-  margin: 10% auto;
-  text-align: center;
+.button {
+font-size: 17px;
+width: 100px;
+margin: auto;
+margin-top: 20px;
+cursor: pointer;
+border: solid 3px gray;
+border-radius: 5px;
+text-align: center;
+color: #fff;
+
 }
-#wordContainer {
+#gameTitle{
+  margin-top: 60px;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+}
+
+
+#gameContent{
+  margin: auto;
+  width: 800px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  background: aqua;
+
+}
+#wordHolder {
   margin-top: 50px;
   margin-left: 150px;
+}
+#guesses{
+  margin-top:20px;
+  margin-left: 150px;
+}
+#feedback{
+  margin-top: 20px;
+  margin-left: 150px;
+  font-size: 32px;
+  color: #fff;
 }
 
 .tile {
@@ -23,4 +58,5 @@ body {
   font-size: 26px;
   color: #333;
   padding-top: 5px;
+  margin: 0px 5px;
 }
