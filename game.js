@@ -6,7 +6,7 @@ $(document).ready(function () {
   // var alphabet = [
   //   "a", "b", "c", "d",  "e", "f",  "g", "h", "i",  "j", "k", "l", "m", "n",  "o",  "p", "q",  "r",  "s", "t", "u", "v", "w", "x", "y", "z" ];
   
-    const wordBank = ['bulbasaur', 'snorlax', 'jynx','squirtle','butterfree','pikachu','Nidoqueen','Nidoking','sandshrew','clefable','vulpix',
+    const wordBank = ['bulbasaur', 'snorlax', 'jynx','squirtle','butterfree','pikachu','nidoqueen','nidoking','sandshrew','clefable','vulpix',
     'oddish','venomoth','dugtrio','meowth','primeape','psyduck','growlith','poliwag','alakazam','machamp','weepinbell','tentacruel','geodude',
     'rapidash','slowbro','magnemite','dodrio','grimer','cloyster','gengar','onix','drowzee','electrode','exeggutor','cubone','hitmonlee','lickitung',
     'weezing','rhydon','chansey','tangela','starmie','scyther','magmar','tauros','lapras','ditto','vaporeon','porygon','aerodactyl','zapdos','dragonite',
@@ -22,16 +22,17 @@ $(document).ready(function () {
   function titleScreen(){
     $('#gameContent').append('<div id="gameTitle"></div><div id="startButton" class="button">BEGIN</div>');		
     $('#startButton').on("click",function (){gameScreen()});
+    $('#opening')[0].play();
   }//display game
   
   
     //display the game screen
     
     function gameScreen(){
-    livesRemaining = 6;
+    livesRemaining = 7;
     $('#gameContent').empty(); //empties titleScreen in order to create the gameScreen
     $('#gameContent').append('<div id="wordHolder"></div>');
-    $('#gameContent').append('<div id="guesses">Previous guesses:</div>');
+    $('#gameContent').append('<div id="guesses">' + 'Previous guesses:' + '<br>' + '</div>');
     $('#gameContent').append('<div id="lives">' + 'Lives Remaining: ' + livesRemaining + '</div>');
     $('#gameContent').append('<div id="feedback"></div>');
     
@@ -107,8 +108,11 @@ $(document).ready(function () {
     document.activeElement.blur();
     $(document).off("keyup", handleKeyUp);
     $('#feedback').append("You Win!!!<br><br><div id='replay' class='button'>CONTINUE</div>");
+    $('#opening')[0].pause();
     $('#winSound')[0].play();
     $('#replay').click(function(){
+      $('#winSound')[0].pause();
+      $('#opening')[0].play();
       gameScreen();
     }); 
   }
@@ -120,8 +124,11 @@ $(document).ready(function () {
     console.log("game over :(")
     $(document).off("keyup", handleKeyUp);
     $('#feedback').append("Game Over!<br>(answer= "+ currentWord +")<div id='replay' class='button'>CONTINUE</div>");
+    $('#opening')[0].pause();
     $('#failSound')[0].play();
     $('#replay').click(function(){
+      $('#failSound')[0].pause();
+    $('#opening')[0].play();
       gameScreen();
     }); 
     
