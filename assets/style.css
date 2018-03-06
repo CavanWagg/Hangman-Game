@@ -1,19 +1,39 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: aquamarine;
+  background: #eebd8b;
 
+}
+@font-face {
+  font-family: "Pokemon-solid";
+  src: url(Pokemon-Solid.ttf);
+  
+}
+@font-face {
+  font-family: "Pokemon-hollow";
+  src: url(Pokemon-Hollow.ttf); 
+}
+h1 {
+ font-family: "Pokemon-hollow";
+ color: #186a62;
+ text-align: center;
+ background: #ffeebd;
 }
 
 .button {
-font-size: 17px;
-width: 100px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+font-size: 32px;
+width: 200px;
 margin: auto;
-margin-top: 20px;
+margin-top: 25%;
 cursor: pointer;
-border: solid 3px gray;
+border: solid 5px #5a3920;
 border-radius: 5px;
 text-align: center;
+background: #186a62;
+font-family: "Pokemon-hollow";
 color: #fff;
 
 }
@@ -21,42 +41,57 @@ color: #fff;
   margin-top: 60px;
   text-align: center;
   font-size: 40px;
-  color: #fff;
+ color: #186a62;
+}
+#lives {
+  color: #ffeebd;
+  margin: auto;
+  font-size: 30px;
 }
 
-
 #gameContent{
+  display: flex;
+  flex-direction: column;
   margin: auto;
   width: 800px;
   height: 400px;
   position: relative;
   overflow: hidden;
-  background: aqua;
+  background: #ee9c39;
 
 }
 #wordHolder {
-  margin-top: 50px;
-  margin-left: 150px;
+  margin: auto;
 }
 #guesses{
-  margin-top:20px;
-  margin-left: 150px;
+  margin: auto;
+  color: #ffeebd;
+  font-size: 30px;
 }
 #feedback{
-  margin-top: 20px;
-  margin-left: 150px;
-  font-size: 32px;
-  color: #fff;
+  margin: auto;
+  font-size: 36px;
+  color: #ffeebd;
+  background: #5a3920;
+  
 }
 
 .tile {
   float: left;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   background-color: white;
   text-align: center;
-  font-size: 26px;
-  color: #333;
-  padding-top: 5px;
+  font-size: 40px;
+  font-family: "pokemon-solid";
+  color: #186a62;
   margin: 0px 5px;
+}
+#gameContent img {
+  display: block;
+  margin: auto;
+  margin-top: 80px;
+  width: 200px;
+  border: 5px solid #186a62;
+  border-radius: 10%;
 }

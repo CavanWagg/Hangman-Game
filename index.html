@@ -7,142 +7,15 @@
 </head>
 
 <body>
- <h1>Hangman!</h1>
- <div id="gameContent"></div>
+ <h1>Pokémon Hangman!</h1>
+ 
+ <div id="gameContent"> <img src="assets/bulbasaur.jpg" alt="pokemon"> </div>
  <audio id="failSound" src="assets/fail.mp3"></audio>
+ <audio id="winSound" src="assets/win.mp3"></audio>
+
 
  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript">
  </script>
- <script> 
-   $(document).ready(function () {
-
-//controller
-var alphabet = [
-  "a", "b", "c", "d",  "e", "f",  "g", "h", "i",  "j", "k", "l", "m", "n",  "o",  "p", "q",  "r",  "s", "t", "u", "v", "w", "x", "y", "z" ];
-
-  const wordBank = ['abyss','axiom','bandwagon','bookworm','blizzard','boxcar','croquet','dwarves','espionage',
-'galvanize','haphazard','jaundice','jiujitsu','jawbreaker','kazoo','jukebox','larynx','kiwifruit','microwave',
-'knapsack', 'oxygen', 'numbskull', 'pajama', 'pnuemonia','rickshaw','snazzy','strength', 
-'syndrome', 'vortex', 'witchcraft', 'zephyr'];
-
-	var wordArray=new Array;
-	var previousGuesses=new Array;
-  var wrongAnswerCount;
-  var currentWord = new String;
-
-titleScreen();
-//title screen
-function titleScreen(){
-	$('#gameContent').append('<div id="gameTitle">HANGMAN</div><div id="startButton" class="button">BEGIN</div>');		
-	$('#startButton').on("click",function (){gameScreen()});
-}//display game
-
-
-  //display the game screen
-  
-  function gameScreen(){
-	$('#gameContent').empty(); //empties titleScreen in order to create the gameScreen
-	$('#gameContent').append('<div id="wordHolder"></div>');
-  $('#gameContent').append('<div id="guesses">Previous guesses:</div>');
-  $('#gameContent').append('<div id="feedback"></div>');
-  
-
-  //for the button
-  getWord();
-  var numberOfTiles= wordArray.length;
-  wrongAnswerCount = 0;
-  previousGuesses=[];
-
-  for(i=0; i<numberOfTiles; i++){
-    $('#wordHolder').append('<div class="tile" id=t'+i+'></div>');
-  }
-
-  
-}
-
-function getWord() {
-    currentWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-    wordArray = currentWord.split("");
-    console.log(currentWord);
-  }
-
-//Key input function 
-$(document).on("keyup",handleKeyUp);
-function handleKeyUp(event) {
-
-	if(event.keyCode>64 && event.keyCode<91){
-		var found=false; //this variable is used to determine if the typed key is located in the word
-		var previouslyEntered=false; //this variable is used to check if the letter has previously been typed
-		var input=String.fromCharCode(event.keyCode).toLowerCase(); //converts the code to a letter converting to lowercase
-		
-	
-		for(i=0;i<previousGuesses.length;i++){
-      if(input==previousGuesses[i]){previouslyEntered=true;}}
-        
-      
-    //only run if letter has not already been typed  
-		if(!previouslyEntered){
-      previousGuesses.push(input); //adds the current letter to previousGuesses array.
-      //check whether word contains the letter
-			for(i=0;i<wordArray.length;i++){
-        //if true, append letter to appropriate tile
-				if(input==wordArray[i]){found=true;$('#t'+i).append(input);}	
-			}//for
-				
-			if(found){checkAnswer();}
-			else{wrongAnswer(input);}
-		}
-	}
-}
-//check for answer 
-function checkAnswer(){
-	var currentAnswer="";	
-	for(i=0;i<wordArray.length;i++){
-    currentAnswer+=($('#t'+i).text());
-    console.log(currentAnswer);
-	}		
-	if(currentAnswer==currentWord){
-    console.log('hello');
-		victoryMessage();
-	};
-};
-//For incorrect guesses
-function wrongAnswer(a){
-  wrongAnswerCount++;
-  console.log(wrongAnswerCount);
-  if(wrongAnswerCount == 5){
-    gameOver();
-  }
-}
-//Victory 
-
-function victoryMessage(){
-	document.activeElement.blur();
-	$(document).off("keyup", handleKeyUp);
-	$('#feedback').append("You Win!!!<br><br><div id='replay' class='button'>CONTINUE</div>");
-}
-
-
-//game over
-function gameOver(){
-  //play sound effect
-  console.log("game over :(")
-  $('#feedback').append("You're Dead!<br>(answer= "+ currentWord +")<div id='replay' class='button'>CONTINUE</div>");
-  $('#failSound')[0].play();
-  
-}
-	// $('#replay').on("click",function (){
-	// 	if(questionBank.length>0){
-	// 		gameScreen()}
-	// 	else{finalPage()}
-	
-//defeat
-
-
- 
-
-});
-
- </script>
+ <script src="game.js"></script>
 </body>
 </html>

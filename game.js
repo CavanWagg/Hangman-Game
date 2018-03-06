@@ -1,117 +1,139 @@
-'use strict';
-
-const wordBank = ['abyss','axiom','bandwagon','bookworm','blizzard','boxcar','croquet','dwarves','espionage',
-'galvanize','haphazard','jaundice','jiujitsu','jawbreaker','kazoo','jukebox','larynx','kiwifruit','microwave',
-'knapsack', 'oxygen', 'numbskull', 'pajama', 'pnuemonia','rickshaw','snazzy','strength', 
-'syndrome', 'vortex', 'witchcraft', 'zephyr'];
 
 
-var keysPressed = [];
-      
-var keyCodes = {
-  65: "a", 
-  66: "b", 
-  67: "c", 
-  68: "d", 
-  69: "e", 
-  70: "f", 
-  71: "g", 
-  72: "h", 
-  73: "i", 
-  74: "j", 
-  75: "k", 
-  76: "l", 
-  77: "m", 
-  78: "n", 
-  79: "o", 
-  80: "p", 
-  81: "q", 
-  82: "r", 
-  83: "s", 
-  84: "t", 
-  85: "u", 
-  86: "v", 
-  87: "w", 
-  88: "x", 
-  89: "y", 
-  90: "z" 
-}
+$(document).ready(function () {
 
-
-function assignWord(){
-  let word = wordBank[Math.floor(Math.random() * wordBank.length)];
-  return word;
-}
-
-function updateHangman(frame){
-  board.text(frame);
-}
-
-function createWordSquares(){
-  for(var i=0, len = word.length; i < len; i++){
-    var id = 'letter_' + i;
-    $('<div>', {id: id, class: 'wordy'}).appendTo(wordContainer);
-  }
-}
-assignWord();
-updateHangman(frames[1]);
-createWordSquares();
-
-
-
-
-
-
-$(document).keydown(function(e) {
-  if(e.keyCode > 64 && e.keyCode < 91){
-    $("#results").text("You pressed: " + keyCodes[e.keyCode]);
-
-    if($.inArray(e.keyCode, keysPressed) !== -1){
-      $("#results").append("<span class='warning';> - you have guessed this letter already!!</span>");
+  //controller
+  // var alphabet = [
+  //   "a", "b", "c", "d",  "e", "f",  "g", "h", "i",  "j", "k", "l", "m", "n",  "o",  "p", "q",  "r",  "s", "t", "u", "v", "w", "x", "y", "z" ];
+  
+    const wordBank = ['bulbasaur', 'snorlax', 'jynx','squirtle','butterfree','pikachu','Nidoqueen','Nidoking','sandshrew','clefable','vulpix',
+    'oddish','venomoth','dugtrio','meowth','primeape','psyduck','growlith','poliwag','alakazam','machamp','weepinbell','tentacruel','geodude',
+    'rapidash','slowbro','magnemite','dodrio','grimer','cloyster','gengar','onix','drowzee','electrode','exeggutor','cubone','hitmonlee','lickitung',
+    'weezing','rhydon','chansey','tangela','starmie','scyther','magmar','tauros','lapras','ditto','vaporeon','porygon','aerodactyl','zapdos','dragonite',
+    'mewtwo'];
+  
+    var wordArray=new Array;
+    var previousGuesses=new Array;
+    var currentWord = new String;
+    var livesRemaining;
+  
+  titleScreen();
+  //title screen
+  function titleScreen(){
+    $('#gameContent').append('<div id="gameTitle"></div><div id="startButton" class="button">BEGIN</div>');		
+    $('#startButton').on("click",function (){gameScreen()});
+  }//display game
+  
+  
+    //display the game screen
+    
+    function gameScreen(){
+    livesRemaining = 6;
+    $('#gameContent').empty(); //empties titleScreen in order to create the gameScreen
+    $('#gameContent').append('<div id="wordHolder"></div>');
+    $('#gameContent').append('<div id="guesses">Previous guesses:</div>');
+    $('#gameContent').append('<div id="lives">' + 'Lives Remaining: ' + livesRemaining + '</div>');
+    $('#gameContent').append('<div id="feedback"></div>');
+    
+  
+    //for the button
+    getWord();
+    var numberOfTiles= wordArray.length;
+    
+    previousGuesses=[];
+  
+    for(i=0; i<numberOfTiles; i++){
+      $('#wordHolder').append('<div class="tile" id=t'+i+'></div>');
     }
-
-    keysPressed.push(e.keyCode);
-    keysPressed = $.unique(keysPressed);
-  } else {
-    $("#results").text("Guess a letter you twit!");
+  
+    $(document).on("keyup",handleKeyUp);
   }
-  var keys = keysPressed.map(function(value){
-    return keyCodes[value];
-  }).sort().join(', ');
   
-  $("#keysPressed").text(keys);
-});
-
-
-
-
-
-
-
-
-//Select word randomly from list of words
-
-//   let word = wordBank[Math.floor(Math.random() * wordBank.length)];
-
-//   let answerArray = [];
-//   for ( let i = 0; i < word.length; i++) {
-//     answerArray[i] = "_";
+  function getWord() {
+      currentWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+      wordArray = currentWord.split("");
+    }
   
-//   }
-//   console.log(answerArray);
-
-//    let remainingLetters = word.length;
- 
-//    while (remainingLetters > 0) {
-
-// //      // Game code goes here
-// //  // Show the player their progress
-// //  // Take input from the player
-//     let guess = //keyinput 
-
-// //  // Update answerArray and remainingLetters for every correct guess
-// //     document.getElementById('para');
-// //     document.write(answerArray.join);
-// //   }
+  //Key input function 
+  $(document).on("keyup",handleKeyUp);
+  function handleKeyUp(event) {
   
-
+    if(event.keyCode>64 && event.keyCode<91){
+      var found=false; //this variable is used to determine if the typed key is located in the word
+      var previouslyEntered=false; //this variable is used to check if the letter has previously been typed
+      var input=String.fromCharCode(event.keyCode).toLowerCase(); //converts the code to a letter converting to lowercase
+      
+    
+      for(i=0;i<previousGuesses.length;i++){
+        if(input==previousGuesses[i]){previouslyEntered=true;}}
+          
+        
+      //only run if letter has not already been typed  
+      if(!previouslyEntered){
+        previousGuesses.push(input); //adds the current letter to previousGuesses array.
+        //check whether word contains the letter
+        for(i=0;i<wordArray.length;i++){
+          //if true, append letter to appropriate tile
+          if(input==wordArray[i]){found=true;$('#t'+i).append(input);}	
+        }//for
+          
+        if(found){checkAnswer();}
+        else{wrongAnswer(input);}
+      }
+    }
+  }
+  //check for answer 
+  function checkAnswer(){
+    var currentAnswer="";	
+    for(i=0;i<wordArray.length;i++){
+      currentAnswer+=($('#t'+i).text());
+    }		
+    if(currentAnswer==currentWord){
+      victoryMessage();
+    };
+  };
+  //For incorrect guesses
+  function wrongAnswer(a){
+    livesRemaining--;
+    $('#guesses').append(" "+a);
+    $('#lives').html('lives Remaining: ' + livesRemaining);
+    if(livesRemaining == 0){
+      gameOver();
+    }
+  }
+  //Victory 
+  
+  function victoryMessage(){
+    document.activeElement.blur();
+    $(document).off("keyup", handleKeyUp);
+    $('#feedback').append("You Win!!!<br><br><div id='replay' class='button'>CONTINUE</div>");
+    $('#winSound')[0].play();
+    $('#replay').click(function(){
+      gameScreen();
+    }); 
+  }
+  
+  
+  //game over
+  function gameOver(){
+    //play sound effect
+    console.log("game over :(")
+    $(document).off("keyup", handleKeyUp);
+    $('#feedback').append("Game Over!<br>(answer= "+ currentWord +")<div id='replay' class='button'>CONTINUE</div>");
+    $('#failSound')[0].play();
+    $('#replay').click(function(){
+      gameScreen();
+    }); 
+    
+  }
+    // $('#replay').on("click",function (){
+    // 	if(questionBank.length>0){
+    // 		gameScreen()}
+    // 	else{finalPage()}
+    
+  //defeat
+  
+  
+   
+  
+  });
